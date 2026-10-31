@@ -1,4 +1,5 @@
 resource "aws_lb_target_group" "sydney_target_group" {
+  provider    = aws.sydney
   name        = "sydney-alb-tg"
   port        = 80
   protocol    = "HTTP"
@@ -27,18 +28,21 @@ resource "aws_lb_target_group" "sydney_target_group" {
 }
 
 resource "aws_lb_target_group_attachment" "sydney_tg_attachment_one" {
+  provider         = aws.sydney
   target_group_arn = aws_lb_target_group.sydney_target_group.arn
   target_id        = module.sydney_EC2["1"].id
   port             = 80
 }
 
 resource "aws_lb_target_group_attachment" "sydney_tg_attachment_two" {
+  provider         = aws.sydney
   target_group_arn = aws_lb_target_group.sydney_target_group.arn
   target_id        = module.sydney_EC2["2"].id
   port             = 80
 }
 
 resource "aws_lb" "sydney_lb" {
+  provider           = aws.sydney
   name               = "sydney-lb"
   internal           = false
   load_balancer_type = "application"
@@ -57,6 +61,7 @@ resource "aws_lb" "sydney_lb" {
 }
 
 resource "aws_lb_listener" "http_listener" {
+  provider          = aws.sydney
   load_balancer_arn = aws_lb.sydney_lb.arn
   port              = "80"
   protocol          = "HTTP"

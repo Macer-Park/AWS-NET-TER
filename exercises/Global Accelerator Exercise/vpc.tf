@@ -1,6 +1,7 @@
 module "aws_sydney_vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.0"
+  source    = "terraform-aws-modules/vpc/aws"
+  version   = "~> 5.0"
+  providers = { aws = aws.sydney }
 
   name = "SYDNEY-VPC"
   cidr = "10.0.0.0/16"
@@ -15,12 +16,13 @@ module "aws_sydney_vpc" {
 }
 
 module "aws_sao_paulo_vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.0"
+  source    = "terraform-aws-modules/vpc/aws"
+  version   = "~> 5.0"
+  providers = { aws = aws.sao_paulo }
 
   name           = "SAOPAULO-VPC"
   cidr           = "10.0.0.0/16"
-  azs            = ["us-east-1a", "us-east-1c"]
+  azs            = ["sa-east-1a", "sa-east-1c"]
   public_subnets = ["10.0.0.0/24", "10.0.1.0/24"]
 
   tags = {
@@ -32,6 +34,7 @@ module "aws_sao_paulo_vpc" {
 module "aws_seoul_vpc" {
   source         = "terraform-aws-modules/vpc/aws"
   version        = "~> 5.0"
+  providers      = { aws = aws.seoul }
   name           = "SEOUL-VPC"
   cidr           = "10.0.0.0/16"
   azs            = ["ap-northeast-2a"]

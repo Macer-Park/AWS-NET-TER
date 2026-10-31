@@ -1,6 +1,7 @@
 module "sao_paulo_EC2" {
-  source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "~> 5.0"
+  source    = "terraform-aws-modules/ec2-instance/aws"
+  version   = "~> 5.0"
+  providers = { aws = aws.sao_paulo }
 
   for_each = {
     "1" = module.aws_sao_paulo_vpc.public_subnets[0] # sa-east-1a 
@@ -28,8 +29,9 @@ module "sao_paulo_EC2" {
 
 
 module "sydney_EC2" {
-  source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "~> 5.0"
+  source    = "terraform-aws-modules/ec2-instance/aws"
+  version   = "~> 5.0"
+  providers = { aws = aws.sydney }
 
   for_each = {
     "1" = module.aws_sydney_vpc.public_subnets[0] # ap-southeast-2a 
@@ -56,8 +58,9 @@ module "sydney_EC2" {
 }
 
 module "seoul_EC2" {
-  source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "~> 5.0"
+  source    = "terraform-aws-modules/ec2-instance/aws"
+  version   = "~> 5.0"
+  providers = { aws = aws.seoul }
 
   instance_type = "t2.micro"
   key_name      = var.key_pair_C

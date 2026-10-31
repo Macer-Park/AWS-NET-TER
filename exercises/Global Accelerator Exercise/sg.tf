@@ -1,6 +1,7 @@
 module "sydney_http_ssh_sg" {
-  source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 5.0"
+  source    = "terraform-aws-modules/security-group/aws"
+  version   = "~> 5.0"
+  providers = { aws = aws.sydney }
 
   name        = "HTTP_SSH_Permit_SG"
   description = "HTTP open to the internet, SSH only from ssh_ingress_cidr"
@@ -13,8 +14,9 @@ module "sydney_http_ssh_sg" {
 }
 
 module "sao_paulo_http_ssh_sg" {
-  source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 5.0"
+  source    = "terraform-aws-modules/security-group/aws"
+  version   = "~> 5.0"
+  providers = { aws = aws.sao_paulo }
 
   name        = "HTTP_SSH_Permit_SG"
   description = "HTTP open to the internet, SSH only from ssh_ingress_cidr"
@@ -29,6 +31,7 @@ module "sao_paulo_http_ssh_sg" {
 module "seoul_http_ssh_sg" {
   source                   = "terraform-aws-modules/security-group/aws"
   version                  = "~> 5.0"
+  providers                = { aws = aws.seoul }
   name                     = "HTTP_SSH_Permit_SG"
   description              = "HTTP open to the internet, SSH only from ssh_ingress_cidr"
   vpc_id                   = module.aws_seoul_vpc.vpc_id
