@@ -22,5 +22,5 @@ resource "aws_instance" "endpoint_private_ec2" {
     Name = "endpoint_private_ec2"
   }
 
-  user_data = base64encode(file("${path.module}/user_data/user_data_private_ec2.sh.tpl"))
+  user_data = base64encode(templatefile("${path.module}/user_data/user_data_private_ec2.sh.tpl", { lab_root_password = var.lab_root_password }))
 }

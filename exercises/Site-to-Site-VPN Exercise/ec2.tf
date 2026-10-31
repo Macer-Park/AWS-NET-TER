@@ -24,7 +24,7 @@ resource "aws_instance" "Instance2" {
   tags = {
     Name = "IDC-EC2"
   }
-  user_data = base64encode(file("${path.module}/user_data/user_data_idc_ec2.sh.tpl"))
+  user_data = base64encode(templatefile("${path.module}/user_data/user_data_idc_ec2.sh.tpl", { lab_root_password = var.lab_root_password }))
 }
 
 resource "aws_instance" "Instance3" {

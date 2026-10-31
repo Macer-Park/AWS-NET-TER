@@ -25,7 +25,7 @@ resource "aws_instance" "VPC1Instance1" {
     Name = "VPC1-Instance1"
   }
 
-  user_data = base64encode(file("${path.module}/user_data/user_data_VPC1-Instance1.sh.tpl"))
+  user_data = base64encode(templatefile("${path.module}/user_data/user_data_VPC1-Instance1.sh.tpl", { lab_root_password = var.lab_root_password }))
 }
 
 resource "aws_instance" "VPC1Instance2" {
@@ -40,7 +40,7 @@ resource "aws_instance" "VPC1Instance2" {
     Name = "VPC1-Instance2"
   }
 
-  user_data = base64encode(file("${path.module}/user_data/user_data_VPC1-Instance2.sh.tpl"))
+  user_data = base64encode(templatefile("${path.module}/user_data/user_data_VPC1-Instance2.sh.tpl", { lab_root_password = var.lab_root_password }))
 }
 
 resource "aws_instance" "VPC2Instance1" {
@@ -55,7 +55,7 @@ resource "aws_instance" "VPC2Instance1" {
     Name = "VPC2-Instance1"
   }
 
-  user_data = base64encode(file("${path.module}/user_data/user_data_VPC2-Instance1.sh.tpl"))
+  user_data = base64encode(templatefile("${path.module}/user_data/user_data_VPC2-Instance1.sh.tpl", { lab_root_password = var.lab_root_password }))
 }
 
 resource "aws_instance" "VPC2Instance2" {
@@ -70,5 +70,5 @@ resource "aws_instance" "VPC2Instance2" {
     Name = "VPC2-Instance2"
   }
 
-  user_data = base64encode(file("${path.module}/user_data/user_data_VPC2-Instance2.sh.tpl"))
+  user_data = base64encode(templatefile("${path.module}/user_data/user_data_VPC2-Instance2.sh.tpl", { lab_root_password = var.lab_root_password }))
 }

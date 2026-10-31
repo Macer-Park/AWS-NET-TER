@@ -1,5 +1,6 @@
 module "aws_sydney_vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 5.0"
 
   name = "SYDNEY-VPC"
   cidr = "10.0.0.0/16"
@@ -14,7 +15,8 @@ module "aws_sydney_vpc" {
 }
 
 module "aws_sao_paulo_vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 5.0"
 
   name           = "SAOPAULO-VPC"
   cidr           = "10.0.0.0/16"
@@ -29,6 +31,7 @@ module "aws_sao_paulo_vpc" {
 
 module "aws_seoul_vpc" {
   source         = "terraform-aws-modules/vpc/aws"
+  version        = "~> 5.0"
   name           = "SEOUL-VPC"
   cidr           = "10.0.0.0/16"
   azs            = ["ap-northeast-2a"]

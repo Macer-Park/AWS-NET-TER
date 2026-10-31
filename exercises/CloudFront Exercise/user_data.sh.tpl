@@ -1,7 +1,7 @@
 #!/bin/bash
 # Download test.jpg (Ensure URLs are correct)
-sudo wget https://raw.githubusercontent.com/Macer-Park/macer.github.io/main/resources/test.jpg -O /home/ec2-user/test.jpg
-sudo wget https://raw.githubusercontent.com/Macer-Park/macer.github.io/main/resources/test.jpg -P /usr/share/nginx/html/
+sudo wget https://raw.githubusercontent.com/Macer-Park/AWS-NET-TER/main/resources/test.jpg -O /home/ec2-user/test.jpg
+sudo wget https://raw.githubusercontent.com/Macer-Park/AWS-NET-TER/main/resources/test.jpg -P /usr/share/nginx/html/
 
 # Install Nginx (Install latest available version)
 amazon-linux-extras install -y nginx1 > /var/log/nginx_install.log 2>&1

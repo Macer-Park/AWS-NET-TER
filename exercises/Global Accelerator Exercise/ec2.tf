@@ -1,5 +1,6 @@
 module "sao_paulo_EC2" {
-  source = "terraform-aws-modules/ec2-instance/aws"
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "~> 5.0"
 
   for_each = {
     "1" = module.aws_sao_paulo_vpc.public_subnets[0] # sa-east-1a 
@@ -18,7 +19,7 @@ module "sao_paulo_EC2" {
   create_eip = true
   eip_domain = "vpc"
 
-  user_data = base64encode(file("${path.module}/user_data/user_data_sao_paulo.sh.tpl"))
+  user_data = base64encode(templatefile("${path.module}/user_data/user_data_sao_paulo.sh.tpl", { host = "SAOPAULO", instance_number = each.key }))
   tags = {
     Terraform   = "true"
     Environment = "dev"
@@ -27,7 +28,8 @@ module "sao_paulo_EC2" {
 
 
 module "sydney_EC2" {
-  source = "terraform-aws-modules/ec2-instance/aws"
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "~> 5.0"
 
   for_each = {
     "1" = module.aws_sydney_vpc.public_subnets[0] # ap-southeast-2a 
@@ -46,7 +48,7 @@ module "sydney_EC2" {
   create_eip = true
   eip_domain = "vpc"
 
-  user_data = base64encode(file("${path.module}/user_data/user_data_sao_paulo.sh.tpl"))
+  user_data = base64encode(templatefile("${path.module}/user_data/user_data_sydney.sh.tpl", { host = "SYDNEY", instance_number = each.key }))
   tags = {
     Terraform   = "true"
     Environment = "dev"
@@ -54,7 +56,8 @@ module "sydney_EC2" {
 }
 
 module "seoul_EC2" {
-  source = "terraform-aws-modules/ec2-instance/aws"
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "~> 5.0"
 
   instance_type = "t2.micro"
   key_name      = var.key_pair_C

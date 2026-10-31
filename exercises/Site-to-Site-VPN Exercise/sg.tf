@@ -10,16 +10,17 @@ resource "aws_security_group" "SG1" {
     from_port   = -1
     to_port     = -1
     protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = concat([var.ssh_ingress_cidr], ["10.0.0.0/8"])
   }
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = concat([var.ssh_ingress_cidr], ["10.0.0.0/8"])
   }
 
+  # IPsec NAT-T from the AWS tunnel endpoints. Their IPs are only known after the VPN is created; the tunnel itself is authenticated by the pre-shared key.
   ingress {
     from_port   = 4500
     to_port     = 4500
@@ -47,17 +48,17 @@ resource "aws_security_group" "SG2" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = concat([var.ssh_ingress_cidr], ["10.0.0.0/8"])
   }
 
   ingress {
     from_port   = -1
     to_port     = -1
     protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = concat([var.ssh_ingress_cidr], ["10.0.0.0/8"])
   }
 
-    egress {
+  egress {
     from_port   = 0
     to_port     = 0
     protocol    = "all"
@@ -77,17 +78,17 @@ resource "aws_security_group" "SG3" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = concat([var.ssh_ingress_cidr], ["10.0.0.0/8"])
   }
 
   ingress {
     from_port   = -1
     to_port     = -1
     protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = concat([var.ssh_ingress_cidr], ["10.0.0.0/8"])
   }
 
-    egress {
+  egress {
     from_port   = 0
     to_port     = 0
     protocol    = "all"

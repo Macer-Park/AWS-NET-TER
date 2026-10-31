@@ -9,7 +9,7 @@ resource "aws_security_group" "VPC0SG1" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = concat([var.ssh_ingress_cidr], ["10.0.0.0/8"])
   }
 
   ingress {
@@ -37,7 +37,7 @@ resource "aws_security_group" "VPC0SG1" {
     from_port   = -1
     to_port     = -1
     protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = concat([var.ssh_ingress_cidr], ["10.0.0.0/8"])
   }
 
   egress {
@@ -73,7 +73,7 @@ resource "aws_security_group" "VPC0SG2" {
     from_port   = -1
     to_port     = -1
     protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = concat([var.ssh_ingress_cidr], ["10.0.0.0/8"])
   }
 
   egress {
@@ -96,14 +96,14 @@ resource "aws_security_group" "VPC1SG1" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = concat([var.ssh_ingress_cidr], ["10.0.0.0/8"])
   }
 
   ingress {
     from_port   = -1
     to_port     = -1
     protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = concat([var.ssh_ingress_cidr], ["10.0.0.0/8"])
   }
 
   egress {
@@ -126,14 +126,14 @@ resource "aws_security_group" "VPC2SG1" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = concat([var.ssh_ingress_cidr], ["10.0.0.0/8"])
   }
 
   ingress {
     from_port   = -1
     to_port     = -1
     protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = concat([var.ssh_ingress_cidr], ["10.0.0.0/8"])
   }
 
   egress {

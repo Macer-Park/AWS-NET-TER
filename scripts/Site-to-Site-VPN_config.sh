@@ -3,6 +3,11 @@ printf "Enter CGW Public (or Elastic) IP: "
 read word1
 printf "Enter External IP of VGW's Tunnel1: "
 read word2
+printf "Enter the pre-shared key (same value as the preshared_key Terraform variable): "
+stty -echo
+read psk
+stty echo
+printf "\n"
 
 cat <<EOF> /etc/ipsec.d/aws.conf
 conn Tunnel1
@@ -25,9 +30,11 @@ conn Tunnel1
   dpdaction=restart_by_peer
 EOF
 
+umask 077
 cat <<EOF> /etc/ipsec.d/aws.secrets
-$word1 $word2 : PSK "terraform"
+$word1 $word2 : PSK "$psk"
 EOF
+chmod 600 /etc/ipsec.d/aws.secrets
 
 printf "Start VPN Service.\n"
 systemctl start ipsec
@@ -35,4 +42,3 @@ systemctl enable ipsec
 
 printf "VPN Configuration has completed.\n"
 printf "Please Check cat /etc/ipsec.d/aws.conf\n"
-printf "Please Check cat /etc/ipsec.d/aws.secrets\n"

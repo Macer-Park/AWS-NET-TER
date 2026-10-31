@@ -1,21 +1,11 @@
 # Security Policy
 
-## Supported Versions
-
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+This repository holds personal AWS networking lab code. It is not a maintained product, so there are no supported versions or release branches.
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+If you find a security problem in this code (for example a secret, an overly open security group, or a script that could be abused), please report it privately through GitHub's **Report a vulnerability** button on the Security tab of this repository instead of opening a public issue.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+## Using These Labs Safely
+
+See **Security Notes** in the README. In short: pass your own IP and secrets as Terraform variables at apply time, never commit `*.tfvars` or state files, and destroy the resources when you are done.

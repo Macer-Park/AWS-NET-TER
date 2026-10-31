@@ -1,7 +1,8 @@
 module "terraform-public-ec2-module-set" {
-  source = "terraform-aws-modules/ec2-instance/aws"
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "~> 5.0"
 
-  name = "SA-EC2"
+  name          = "SA-EC2"
   instance_type = "t2.micro"
   key_name      = var.key_pair
   monitoring    = true
